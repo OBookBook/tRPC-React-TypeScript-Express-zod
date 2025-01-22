@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 
+// CSS-in-JS
 const styles: { [key: string]: CSSProperties } = {
   container: {
     display: "flex",
