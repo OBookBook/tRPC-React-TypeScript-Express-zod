@@ -65,7 +65,6 @@ const styles: { [key: string]: CSSProperties } = {
 };
 
 const Test = () => {
-  const test = trpc.test.useQuery();
   const allTodoLists = trpc.getTodoList.useQuery();
 
   return (
