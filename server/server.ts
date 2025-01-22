@@ -51,6 +51,12 @@ const appRouter = router({
 
     return todoList;
   }),
+  deleteTodo: publicProcedure.input(z.number()).mutation((req) => {
+    const todo = todoList.find((todo) => todo.id === req.input);
+    if (todo) todoList.splice(todoList.indexOf(todo), 1);
+
+    return todoList;
+  }),
 });
 app.use("/trpc", createExpressMiddleware({ router: appRouter }));
 

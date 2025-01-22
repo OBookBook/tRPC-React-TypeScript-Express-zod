@@ -97,6 +97,11 @@ const Test = () => {
       allTodoLists.refetch();
     },
   });
+  const deleteTodo = trpc.deleteTodo.useMutation({
+    onSettled: () => {
+      allTodoLists.refetch();
+    },
+  });
 
   return (
     <div style={styles.container}>
@@ -143,6 +148,7 @@ const Test = () => {
             >
               {todo.content}
               <span
+                onClick={() => deleteTodo.mutate(todo.id)}
                 style={styles.deleteButton}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#FF6347")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "red")}
