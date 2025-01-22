@@ -66,9 +66,7 @@ const styles: { [key: string]: CSSProperties } = {
 
 const Test = () => {
   const test = trpc.test.useQuery();
-  console.log(test.data);
-  const getTodoList = trpc.getTodoList.useQuery();
-  console.log(getTodoList.data);
+  const allTodoLists = trpc.getTodoList.useQuery();
 
   return (
     <div style={styles.container}>
@@ -81,22 +79,26 @@ const Test = () => {
         />
         <button style={styles.addButton}>Add Todo</button>
         <ul style={styles.list}>
-          <li
-            style={styles.listItem}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.2)")
-            }
-            onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
-          >
-            TRPCの勉強
-            <span
-              style={styles.deleteButton}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#FF6347")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "red")}
+          {allTodoLists.data?.map((todo) => (
+            <li
+              key={todo.id}
+              style={styles.listItem}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.boxShadow =
+                  "0px 4px 10px rgba(0,0,0,0.2)")
+              }
+              onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
             >
-              ✖
-            </span>
-          </li>
+              {todo.content}
+              <span
+                style={styles.deleteButton}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#FF6347")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "red")}
+              >
+                ✖
+              </span>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
