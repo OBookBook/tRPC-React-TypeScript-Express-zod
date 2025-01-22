@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import { initTRPC } from "@trpc/server";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
@@ -19,6 +20,7 @@ const todoList: Todo[] = [
 ];
 
 const app = express();
+app.use(cors());
 const PORT = 5000;
 
 app.get("/", (req, res) => {
