@@ -1,4 +1,5 @@
 import cors from "cors";
+import { z } from "zod";
 import express from "express";
 import { initTRPC } from "@trpc/server";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
@@ -38,6 +39,16 @@ const appRouter = router({
   }),
   // http://localhost:5000/trpc/getTodoList でアクセス可能
   getTodoList: publicProcedure.query(() => {
+    return todoList;
+  }),
+  addTodo: publicProcedure.input(z.string()).mutation((req) => {
+    const id = `${Math.random()}`;
+    const todo: Todo = {
+      id: Number(id),
+      content: req.input,
+    };
+    todoList.push(todo);
+
     return todoList;
   }),
 });
