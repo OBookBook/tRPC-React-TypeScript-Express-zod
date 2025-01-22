@@ -43,5 +43,7 @@ app.use("/trpc", createExpressMiddleware({ router: appRouter }));
 
 app.listen(PORT);
 
+export type AppRouter = typeof appRouter; // 型をエクスポート
+
 // publicProcedure.query(() => "Hello World"); // query : 値の取得 GET
 // publicProcedure.mutation(() => "Hello World"); // mutation : 値の操作 POST UPDATE DELETE
