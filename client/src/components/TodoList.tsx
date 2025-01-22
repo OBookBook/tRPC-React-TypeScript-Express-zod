@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import { trpc } from "../utils/trpc";
 
 // CSS-in-JS
 const styles: { [key: string]: CSSProperties } = {
@@ -64,6 +65,11 @@ const styles: { [key: string]: CSSProperties } = {
 };
 
 const Test = () => {
+  const test = trpc.test.useQuery();
+  console.log(test.data);
+  const getTodoList = trpc.getTodoList.useQuery();
+  console.log(getTodoList.data);
+
   return (
     <div style={styles.container}>
       <div style={styles.innerContainer}>
